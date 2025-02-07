@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const baseUrl =import.meta.env.MODE=== "development" ? "http://localhost:8000/api/product" :"/api/product"
+const baseUrl =import.meta.env.MODE=== "development" ? "http://localhost:8000/api/product" :"https://fleximart.onrender.com/api/product"
 axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set) => ({
