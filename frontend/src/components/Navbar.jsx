@@ -29,7 +29,7 @@ const Navbar = () => {
               <div className="relative ">
                 <ShoppingBag />
                 <span className="absolute badge rounded-full font-bold  badge-sm bg-primary py-2  top-[-15px] right-[-8px]  ">
-                  
+                  {products.length}
                 </span>
               </div>
             )}
