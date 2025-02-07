@@ -30,9 +30,9 @@ const __dirname = path.resolve();
 
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, "frontend/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.get("*", (_, res) => {
-  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
 });
 
 import productRoutes from "./routes/product.routes.js";
