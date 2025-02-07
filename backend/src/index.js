@@ -22,19 +22,18 @@ app.use(
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://fleximart.onrender.com"],
+    origin: ["http://localhost:5173", ""],
     credentials: true,
   })
 );
 const __dirname = path.resolve();
+
 app.use(cookieParser());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-  });
-}
+app.use(express.static(path.join(__dirname, "frontend/dist")));
+app.get("*", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+});
 
 import productRoutes from "./routes/product.routes.js";
 

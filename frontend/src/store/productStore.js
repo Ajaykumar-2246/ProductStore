@@ -2,16 +2,11 @@ import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const baseUrl =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:8000/api/product"
-    : "/api/product";
-
+const baseUrl ="http://localhost:8000/api/product"
 axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set, get) => ({
   products: [],
-  productList:[],
   isloading: false,
   fetchedById: null,
 
@@ -31,7 +26,7 @@ export const useProductStore = create((set, get) => ({
     set({ isloading: true });
     try {
       const response = await axios.get(`${baseUrl}/getAllProduct`);
-      set({ products: response.data.products,productList:response.data});
+      set({ products: response.data.products});
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
