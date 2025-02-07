@@ -4,7 +4,7 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading, fetchAllProduct, deleteProduct } =
+  const { products, isloading,productsList ,fetchAllProduct, deleteProduct } =
     useProductStore();
   const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products.length > 0 ? (
+          {productsList.count > 0 ? (
             products.map((product) => (
               <div
                 key={product._id}
