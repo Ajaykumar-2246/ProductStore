@@ -22,7 +22,7 @@ app.use(
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", ""],
+    origin: ["http://localhost:5173", "https://fleximart.onrender.com"],
     credentials: true,
   })
 );
