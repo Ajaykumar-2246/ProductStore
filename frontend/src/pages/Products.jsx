@@ -4,7 +4,7 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading, fetchAllProduct, deleteProduct } = useProductStore(); // Default productsList to prevent undefined errors
+  const { products, isloading, fetchAllProduct, deleteProduct } = useProductStore();
   const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ const Products = () => {
   };
 
   // Check if products are available
-  const hasProducts = products?.length > 0;
+  const hasProducts = products && products.length;
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
