@@ -4,9 +4,8 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading, fetchAllProduct, deleteProduct } = useProductStore();
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false); // For handling delete loading state
+  const { products,productList, isloading, fetchAllProduct, deleteProduct } = useProductStore();
+  const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,23 +23,24 @@ const Products = () => {
 
   // Handle Refresh button click
   const handleRefresh = async () => {
-    setIsRefreshing(true);
+    setIsRefresh(true);
     await fetchProducts();
-    setIsRefreshing(false);
+    setIsRefresh(false);
   };
 
   // Handle Delete product click
   const handleDelete = async (id) => {
-    setIsDeleting(true); // Start delete loading state
     await deleteProduct(id);
     fetchProducts(); // Re-fetch products after deletion
-    setIsDeleting(false); // End delete loading state
   };
 
   // Handle product update click
-  const handleProductUpdate = (productId) => {
+  const handleProductUpdate = async (productId) => {
     navigate(`/update/${productId}`);
   };
+
+  // Check if products are available
+  const hasProducts = productList.count>0;
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -70,39 +70,46 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products.map((product) => (
-            <div
-              key={product._id}
-              className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300"
-            >
-              <figure className="px-3 pt-3">
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="rounded-xl h-48 w-full object-cover"
-                />
-              </figure>
-              <div className="card-body p-4">
-                <h2 className="card-title text-lg">{product.name}</h2>
-                <p className="text-md font-semibold">Price: ${product.price}</p>
-                <div className="card-actions justify-end mt-1">
-                  <button
-                    onClick={() => handleProductUpdate(product._id)}
-                    className="btn btn-sm btn-ghost hover:bg-primary/20"
-                  >
-                    <EditIcon className="size-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="btn btn-sm btn-ghost hover:bg-error/20"
-                    disabled={isDeleting} // Disable delete while deleting
-                  >
-                    <Trash2Icon className="size-4" />
-                  </button>
+          {hasProducts ? (
+            products.map((product) => (
+              <div
+                key={product._id}
+                className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              >
+                <figure className="px-3 pt-3">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="rounded-xl h-48 w-full object-cover"
+                  />
+                </figure>
+                <div className="card-body p-4">
+                  <h2 className="card-title text-lg">{product.name}</h2>
+                  <p className="text-md font-semibold">
+                    Price: ${product.price}
+                  </p>
+                  <div className="card-actions justify-end mt-1">
+                    <button
+                      onClick={() => handleProductUpdate(product._id)}
+                      className="btn btn-sm btn-ghost hover:bg-primary/20"
+                    >
+                      <EditIcon className="size-4" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="btn btn-sm btn-ghost hover:bg-error/20"
+                    >
+                      <Trash2Icon className="size-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10">
+              <p className="text-xl">No products available.</p>
             </div>
-          ))}
+          )}
         </div>
       )}
     </div>
