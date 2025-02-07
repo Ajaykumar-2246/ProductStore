@@ -5,7 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { useProductStore } from "../store/productStore";
 
 const Navbar = () => {
-  const { productsList} = useProductStore(); // Ensure products is always an array
+  const { products} = useProductStore(); // Ensure products is always an array
   const { pathname } = useResolvedPath();
   const isProductsPage = pathname === "/";
 
@@ -30,7 +30,7 @@ const Navbar = () => {
               <div className="relative">
                 <ShoppingBag />
                 <span className="absolute badge rounded-full font-bold badge-sm bg-primary py-2 top-[-15px] right-[-8px]">
-                  {productsList.count}
+                  {products.length}
                 </span>
               </div>
             )}

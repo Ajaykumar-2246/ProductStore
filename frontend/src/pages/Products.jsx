@@ -70,7 +70,7 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {productsList?.count > 0 ? (
+          {products?.length > 0 ? (
             products.map((product) => (
               <div
                 key={product._id}
