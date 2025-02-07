@@ -4,9 +4,9 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading, fetchAllProduct, deleteProduct } =
-    useProductStore();
-  const [isRefreshing, setIsRefresh] = useState(false);
+  const { products, isloading, fetchAllProduct, deleteProduct } = useProductStore();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false); // For handling delete loading state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,19 +24,21 @@ const Products = () => {
 
   // Handle Refresh button click
   const handleRefresh = async () => {
-    setIsRefresh(true);
+    setIsRefreshing(true);
     await fetchProducts();
-    setIsRefresh(false);
+    setIsRefreshing(false);
   };
 
   // Handle Delete product click
   const handleDelete = async (id) => {
+    setIsDeleting(true); // Start delete loading state
     await deleteProduct(id);
     fetchProducts(); // Re-fetch products after deletion
+    setIsDeleting(false); // End delete loading state
   };
 
   // Handle product update click
-  const handleProductUpdate = async (productId) => {
+  const handleProductUpdate = (productId) => {
     navigate(`/update/${productId}`);
   };
 
@@ -93,6 +95,7 @@ const Products = () => {
                   <button
                     onClick={() => handleDelete(product._id)}
                     className="btn btn-sm btn-ghost hover:bg-error/20"
+                    disabled={isDeleting} // Disable delete while deleting
                   >
                     <Trash2Icon className="size-4" />
                   </button>
