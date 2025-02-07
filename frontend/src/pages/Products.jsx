@@ -4,33 +4,43 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading, fetchAllProduct, deleteProduct } =
-    useProductStore(); // Default productsList to prevent undefined errors
+  const { products, isloading, fetchAllProduct, deleteProduct } = useProductStore(); // Default productsList to prevent undefined errors
   const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchAllProduct();
+    fetchProducts(); // Fetch products on initial render
   }, []);
 
-  const handleRefresh = async () => {
-    setIsRefresh(true);
+  // Function to fetch all products
+  const fetchProducts = async () => {
     try {
       await fetchAllProduct();
-    } finally {
-      setIsRefresh(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
   };
 
-  const handleDelete = async (id) => {
-    await deleteProduct(id);
-    fetchAllProduct();
+  // Handle Refresh button click
+  const handleRefresh = async () => {
+    setIsRefresh(true);
+    await fetchProducts();
+    setIsRefresh(false);
   };
 
+  // Handle Delete product click
+  const handleDelete = async (id) => {
+    await deleteProduct(id);
+    fetchProducts(); // Re-fetch products after deletion
+  };
+
+  // Handle product update click
   const handleProductUpdate = async (productId) => {
     navigate(`/update/${productId}`);
   };
 
+  // Check if products are available
+  const hasProducts = products?.length > 0;
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -60,7 +70,7 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products?.length > 0 ? (
+          {hasProducts ? (
             products.map((product) => (
               <div
                 key={product._id}
