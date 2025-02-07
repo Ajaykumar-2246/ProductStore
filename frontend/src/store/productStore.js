@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 const baseUrl =
   import.meta.env.MODE === "development"
     ? "http://localhost:8000/api/product"
-    : "https://fleximart.onrender.com/api/product";
+    : "/api/product";
 
 axios.defaults.withCredentials = true;
 

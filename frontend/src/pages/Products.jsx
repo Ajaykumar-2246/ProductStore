@@ -4,13 +4,8 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const {
-    products,
-    isloading,
-    productsList = { count: 0 },
-    fetchAllProduct,
-    deleteProduct,
-  } = useProductStore(); // Default productsList to prevent undefined errors
+  const { products, isloading, fetchAllProduct, deleteProduct } =
+    useProductStore(); // Default productsList to prevent undefined errors
   const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -36,11 +31,6 @@ const Products = () => {
     navigate(`/update/${productId}`);
   };
 
-  // Log productsList and products to see the actual data being used
-  useEffect(() => {
-    console.log("productsList:", productsList);
-    console.log("products:", products);
-  }, [productsList, products]);
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
