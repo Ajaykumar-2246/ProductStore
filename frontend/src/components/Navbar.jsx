@@ -5,9 +5,11 @@ import { ShoppingBag } from "lucide-react";
 import { useProductStore } from "../store/productStore";
 
 const Navbar = () => {
-  const { products = [] } = useProductStore(); // Ensure products is always an array
+  const { productsList} = useProductStore(); // Ensure products is always an array
   const { pathname } = useResolvedPath();
   const isProductsPage = pathname === "/";
+
+  
 
   return (
     <div className="shadow-gray-200 w-full backdrop-blur-lg bg-base border-b border-base-content/10">
@@ -24,11 +26,11 @@ const Navbar = () => {
             <div className="z-60">
               <ThemeSelector />
             </div>
-            {isProductsPage && products.length > 0 && (
+            {isProductsPage  && (
               <div className="relative">
                 <ShoppingBag />
                 <span className="absolute badge rounded-full font-bold badge-sm bg-primary py-2 top-[-15px] right-[-8px]">
-                  {products.length}
+                  {productsList.count}
                 </span>
               </div>
             )}

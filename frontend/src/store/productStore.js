@@ -7,6 +7,7 @@ axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set) => ({
   products: [],
+  productsList:[],
   isloading: false,
   fetchedById: null,
 
@@ -30,7 +31,7 @@ export const useProductStore = create((set) => ({
     set({ isloading: true });
     try {
       const response = await axios.get(`${baseUrl}/getAllProduct`);
-      set({ products: response.data.products });
+      set({ products: response.data.products,productsList:response.data });
       set({ isloading: false });
     } catch (error) {
       console.error("Error fetching products:", error);
