@@ -4,8 +4,13 @@ import { EditIcon, Trash2Icon, CirclePlus, RefreshCw } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const { products, isloading,productsList ,fetchAllProduct, deleteProduct } =
-    useProductStore();
+  const {
+    products,
+    isloading,
+    productsList = { count: 0 },
+    fetchAllProduct,
+    deleteProduct,
+  } = useProductStore(); // Default productsList to prevent undefined errors
   const [isRefreshing, setIsRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -30,6 +35,12 @@ const Products = () => {
   const handleProductUpdate = async (productId) => {
     navigate(`/update/${productId}`);
   };
+
+  // Log productsList and products to see the actual data being used
+  useEffect(() => {
+    console.log("productsList:", productsList);
+    console.log("products:", products);
+  }, [productsList, products]);
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -59,7 +70,7 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products.length > 0 ? (
+          {productsList?.count > 0 ? (
             products.map((product) => (
               <div
                 key={product._id}
