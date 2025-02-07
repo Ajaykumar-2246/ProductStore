@@ -5,8 +5,7 @@ import { ShoppingBag } from "lucide-react";
 import { useProductStore } from "../store/productStore";
 
 const Navbar = () => {
-  const { products } = useProductStore();
-
+  const { products = [] } = useProductStore(); // Ensure products is always an array
   const { pathname } = useResolvedPath();
   const isProductsPage = pathname === "/";
 
@@ -15,9 +14,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto">
         <div className="navbar px-4 min-h-[4rem] flex justify-around items-center">
           <div>
-            <Link to="/" className="text-xl font-bold ">
+            <Link to="/" className="text-xl font-bold">
               <span className="text-3xl italic bg-gradient-to-r from-20% to-35%">
-              FlexiMart
+                FlexiMart
               </span>
             </Link>
           </div>
@@ -25,10 +24,10 @@ const Navbar = () => {
             <div className="z-60">
               <ThemeSelector />
             </div>
-            {isProductsPage && (
-              <div className="relative ">
+            {isProductsPage && products.length > 0 && (
+              <div className="relative">
                 <ShoppingBag />
-                <span className="absolute badge rounded-full font-bold  badge-sm bg-primary py-2  top-[-15px] right-[-8px]  ">
+                <span className="absolute badge rounded-full font-bold badge-sm bg-primary py-2 top-[-15px] right-[-8px]">
                   {products.length}
                 </span>
               </div>
