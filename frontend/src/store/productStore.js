@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 const baseUrl="https://fleximart.onrender.com/api"
 
-// const localhostUrl =" http://localhost:8000/api"
+// const baseUrl =" http://localhost:8000/api"
 axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set, get) => ({
@@ -20,7 +20,7 @@ export const useProductStore = create((set, get) => ({
       toast.success("Product added successfully");
       await get().fetchAllProduct(); // Ensure the function is correctly called
     } catch (error) {
-      console.error("Error adding product:", error);
+      // console.error("Error adding product:", error);
       toast.error("Failed to add product");
     }
   },
@@ -31,7 +31,8 @@ export const useProductStore = create((set, get) => ({
       const response = await axios.get(`${baseUrl}/product/getAllProduct`);
       set({ products: response.data.products,productCount:response.data.count});
     } catch (error) {
-      console.error("Error fetching products:", error);
+      // console.error("Error fetching products:", error);
+      toast.error("Failed to fetch products");
     } finally {
       set({ isloading: false }); // Set loading state only once
     }
@@ -43,7 +44,7 @@ export const useProductStore = create((set, get) => ({
       toast.success("Product successfully deleted");
       await get().fetchAllProduct(); // Refresh products after deletion
     } catch (error) {
-      console.error("Error deleting product:", error);
+      // console.error("Error deleting product:", error);
       toast.error("Failed to delete the product");
     }
   },
@@ -53,7 +54,8 @@ export const useProductStore = create((set, get) => ({
       const res = await axios.get(`${baseUrl}/product/fetchById/${id}`);
       set({ fetchedById: res.data });
     } catch (error) {
-      console.error("Error fetching product by id:", error);
+      // console.error("Error fetching product by id:", error);
+      toast.error("failed to fetch the product")
     }
   },
 
@@ -64,7 +66,7 @@ export const useProductStore = create((set, get) => ({
       toast.success("Product updated successfully");
       await get().fetchAllProduct(); // Refresh the products list after update
     } catch (error) {
-      console.error("Error updating product:", error);
+      // console.error("Error updating product:", error);
       toast.error("Failed to update the product");
     }
   },

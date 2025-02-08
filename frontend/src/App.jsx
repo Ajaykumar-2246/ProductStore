@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import ProductUpdate from "./pages/ProductUpdate";
+import DisplayProduct from "./pages/DisplayProduct";
 
 function App() {
   const { theme } = useThemeStore();
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Products />} />
         <Route path="/addproductpage" element={<AddProduct />} />
         <Route path="/update/:id" element={<ProductUpdate />} />
+        <Route path="/displayProduct/:id" element={<DisplayProduct />} />
       </Routes>
       <Toaster />
     </div>
