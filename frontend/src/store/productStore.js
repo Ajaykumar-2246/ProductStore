@@ -2,8 +2,9 @@ import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+const baseUrl="https://fleximart.onrender.com/api"
 
-const baseUrl =" http://localhost:8000/api"
+// const localhostUrl =" http://localhost:8000/api"
 axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set, get) => ({
