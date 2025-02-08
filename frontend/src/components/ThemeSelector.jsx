@@ -3,7 +3,6 @@ import { Palette } from "lucide-react";
 import { useThemeStore } from "../store/themeStore";
 
 const themes = [
-  { name: "forest", label: "forest" },
   { name: "light", label: "light" },
   { name: "dark", label: "dark" },
 ];
@@ -20,7 +19,7 @@ const ThemeSelector = () => {
           showThemes ? "bg-blue-800/10" : ""
         }`}
       >
-        <Palette className="size-6" />
+        <Palette className="size-6" /> 
       </button>
 
       {showThemes && (
@@ -29,7 +28,7 @@ const ThemeSelector = () => {
             <button
               key={index}
               onClick={() => setTheme(themeOption.name)}
-              className={`block w-full text-left px-2 py-1 rounded-full ${
+              className={`block mb-2 w-full text-left px-2 py-1 rounded-full ${
                 theme === themeOption.name
                   ? "bg-primary/10 text-primary"
                   : "hover:bg-blue-100 hover:text-black"

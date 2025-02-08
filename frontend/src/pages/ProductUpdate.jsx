@@ -42,7 +42,7 @@ const ProductUpdate = () => {
         {/* Back Button */}
         <div className="flex justify-start p-4">
           <button
-            className="btn btn-ghost text-lg font-semibold"
+            className="btn rounded-full btn-ghost text-lg font-semibold"
             onClick={() => navigate("/")}
           >
             <MoveLeft className="mr-2" />

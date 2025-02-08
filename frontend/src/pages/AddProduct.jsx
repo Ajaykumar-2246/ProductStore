@@ -7,19 +7,16 @@ const AddProduct = () => {
   const { addProduct } = useProductStore();
   const navigate = useNavigate();
 
-  // State for form fields
   const [formData, setFormData] = useState({
     name: "",
     price: "",
     imageUrl: "",
   });
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,8 +26,17 @@ const AddProduct = () => {
       return;
     }
 
+    // Validate price
+    if (isNaN(formData.price) || parseFloat(formData.price) <= 0) {
+      alert("Please enter a valid price.");
+      return;
+    }
+
     // Add product and navigate back to products list
-    await addProduct(formData);
+    await addProduct({
+      ...formData,
+      price: parseFloat(formData.price), // Ensure price is a number
+    });
     navigate("/"); // Navigate back to the home or product list page
   };
 
@@ -44,7 +50,7 @@ const AddProduct = () => {
         {/* Back Button */}
         <div className="flex justify-start p-4">
           <button
-            className="btn btn-ghost text-lg font-semibold"
+            className="btn btn-ghost text-lg rounded-full font-semibold"
             onClick={() => navigate("/")}
           >
             <MoveLeft className="mr-2" />
@@ -54,7 +60,7 @@ const AddProduct = () => {
 
         {/* Form Container */}
         <div className="flex justify-center items-center mt-4">
-          <div className="w-full max-w-md bg-base-100 shadow-xl rounded-lg p-6">
+          <div className="w-full w-2/5 max-w-md bg-base-100 shadow-xl rounded-lg p-6">
             <h1 className="text-3xl font-bold text-center mb-6">Add Product</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name */}
@@ -69,6 +75,7 @@ const AddProduct = () => {
                   onChange={handleChange}
                   className="input input-bordered w-full"
                   placeholder="Enter product name"
+                  required
                 />
               </div>
 
@@ -84,6 +91,9 @@ const AddProduct = () => {
                   onChange={handleChange}
                   className="input input-bordered w-full"
                   placeholder="Enter price"
+                  min="0"
+                  step="0.01"
+                  required
                 />
               </div>
 
@@ -99,8 +109,20 @@ const AddProduct = () => {
                   onChange={handleChange}
                   className="input input-bordered w-full"
                   placeholder="https://source.unsplash.com/random/300x200"
+                  required
                 />
               </div>
+
+              {/* Image Preview */}
+              {formData.imageUrl && (
+                <div className="flex justify-center mt-4">
+                  <img
+                    src={formData.imageUrl}
+                    alt="Product Preview"
+                    className="w-48 h-48 object-cover rounded-lg"
+                  />
+                </div>
+              )}
 
               {/* Buttons */}
               <div className="flex justify-end gap-3 mt-6">

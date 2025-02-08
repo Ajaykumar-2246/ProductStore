@@ -2,18 +2,20 @@ import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const baseUrl ="http://localhost:8000/api/product"
+
+const baseUrl =" http://localhost:8000/api"
 axios.defaults.withCredentials = true;
 
 export const useProductStore = create((set, get) => ({
   products: [],
+  productCount:null,
   isloading: false,
   fetchedById: null,
 
   addProduct: async (formData) => {
     const { name, price, imageUrl } = formData;
     try {
-      await axios.post(`${baseUrl}/postProduct`, { name, price, imageUrl });
+      await axios.post(`${baseUrl}/product/postProduct`, { name, price, imageUrl });
       toast.success("Product added successfully");
       await get().fetchAllProduct(); // Ensure the function is correctly called
     } catch (error) {
@@ -25,8 +27,8 @@ export const useProductStore = create((set, get) => ({
   fetchAllProduct: async () => {
     set({ isloading: true });
     try {
-      const response = await axios.get(`${baseUrl}/getAllProduct`);
-      set({ products: response.data.products});
+      const response = await axios.get(`${baseUrl}/product/getAllProduct`);
+      set({ products: response.data.products,productCount:response.data.count});
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -36,7 +38,7 @@ export const useProductStore = create((set, get) => ({
 
   deleteProduct: async (id) => {
     try {
-      await axios.delete(`${baseUrl}/deleteProduct/${id}`);
+      await axios.delete(`${baseUrl}/product/deleteProduct/${id}`);
       toast.success("Product successfully deleted");
       await get().fetchAllProduct(); // Refresh products after deletion
     } catch (error) {
@@ -47,7 +49,7 @@ export const useProductStore = create((set, get) => ({
 
   fetchProductById: async (id) => {
     try {
-      const res = await axios.get(`${baseUrl}/fetchById/${id}`);
+      const res = await axios.get(`${baseUrl}/product/fetchById/${id}`);
       set({ fetchedById: res.data });
     } catch (error) {
       console.error("Error fetching product by id:", error);
@@ -57,7 +59,7 @@ export const useProductStore = create((set, get) => ({
   updateProduct: async (id, productDetails) => {
     const { name, price, imageUrl } = productDetails;
     try {
-      await axios.put(`${baseUrl}/updateProduct/${id}`, { name, price, imageUrl });
+      await axios.put(`${baseUrl}/product/updateProduct/${id}`, { name, price, imageUrl });
       toast.success("Product updated successfully");
       await get().fetchAllProduct(); // Refresh the products list after update
     } catch (error) {
