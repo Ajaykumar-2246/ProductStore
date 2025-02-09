@@ -32,9 +32,9 @@ const Products = () => {
     navigate(`/update/${productId}`);
   };
 
-  const handleDisplayProduct=async (productId) => {
-    navigate(`/displayProduct/${productId}`)
-  }
+  const handleDisplayProduct = async (productId) => {
+    navigate(`/displayProduct/${productId}`);
+  };
 
   return (
     <div className="p-4 bg-base-200">
@@ -63,10 +63,13 @@ const Products = () => {
           products.map((product) => (
             <div
               key={product._id}
-              onClick={()=>handleDisplayProduct(product._id)}
+              onClick={() => handleDisplayProduct(product._id)}
               className="card bg-base-100 shadow-2xl hover:shadow-2xl transition-shadow duration-300"
             >
-              <figure className="px-4 pt-4">
+              <figure
+                onClick={() => handleDisplayProduct(product._id)}
+                className="px-4 pt-4"
+              >
                 <img
                   src={product.imageUrl}
                   alt={product.name}

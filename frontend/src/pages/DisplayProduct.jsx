@@ -51,7 +51,7 @@ const DisplayProduct = () => {
           {/* Product Image */}
           <div className="w-full md:w-1/2 flex justify-center">
             <img
-              className="w-full max-w-lg rounded-lg object-cover shadow-md"
+              className="w-full max-w-md h-96 rounded-lg object-cover shadow-md"
               src={fetchedById.imageUrl}
               alt={fetchedById.name || "Product image"}
             />
