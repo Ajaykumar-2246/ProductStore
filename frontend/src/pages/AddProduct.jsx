@@ -128,7 +128,7 @@ const AddProduct = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className="textarea textarea-bordered w-full"
+                  className="textarea resize-none textarea-bordered w-full"
                   placeholder="Enter product description"
                   rows="4"
                   required
