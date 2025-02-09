@@ -37,7 +37,7 @@ const Products = () => {
   };
 
   return (
-    <div className="p-4 bg-base-200">
+    <div className="p-4 min-h-screen bg-base-200">
       {/* Header Section */}
       <div className="flex md:flex-row justify-between items-center mb-6 gap-4">
         <Link to="/addproductpage">

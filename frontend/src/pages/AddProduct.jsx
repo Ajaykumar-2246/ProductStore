@@ -11,6 +11,7 @@ const AddProduct = () => {
     name: "",
     price: "",
     imageUrl: "",
+    description: "", // Add description field
   });
 
   const handleChange = (e) => {
@@ -21,7 +22,12 @@ const AddProduct = () => {
     e.preventDefault();
 
     // Validate input fields
-    if (!formData.name || !formData.price || !formData.imageUrl) {
+    if (
+      !formData.name ||
+      !formData.price ||
+      !formData.imageUrl ||
+      !formData.description
+    ) {
       alert("Please fill in all fields.");
       return;
     }
@@ -109,6 +115,22 @@ const AddProduct = () => {
                   onChange={handleChange}
                   className="input input-bordered w-full"
                   placeholder="https://source.unsplash.com/random/300x200"
+                  required
+                />
+              </div>
+
+              {/* Description */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Description</span>
+                </label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  className="textarea textarea-bordered w-full"
+                  placeholder="Enter product description"
+                  rows="4"
                   required
                 />
               </div>

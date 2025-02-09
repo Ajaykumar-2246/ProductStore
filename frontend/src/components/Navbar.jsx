@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <div className="shadow-gray-200 w-full backdrop-blur-lg bg-base border-b border-base-content/10">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl px-5 mx-auto">
         <div className="navbar px-3 min-h-[4rem] flex justify-around items-center">
           <div>
             <Link to="/" className="text-xl font-bold ">

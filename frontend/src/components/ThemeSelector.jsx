@@ -23,7 +23,7 @@ const ThemeSelector = () => {
       </button>
 
       {showThemes && (
-        <div className="absolute z-50 top-10 left-[-10px] bg-primary/10 shadow-lg rounded-md w-32 p-2">
+        <div className="absolute z-50 top-10 left-[-10px] bg-primary/10 shadow-lg rounded-md w-24 p-2">
           {themes.map((themeOption, index) => (
             <button
               key={index}

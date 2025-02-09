@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import { useProductStore } from "../store/productStore";
 import { useParams, useNavigate } from "react-router-dom";
-import { MoveLeft} from "lucide-react";
+import { MoveLeft } from "lucide-react";
 
 const DisplayProduct = () => {
-  const { fetchProductById, fetchedById } = useProductStore();
+  const { fetchProductById, fetchedById, resetFetchedById } = useProductStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id) {
-      fetchProductById(id);
-    }
-  }, [fetchProductById, id]);
+    fetchProductById(id);
+  }, [fetchProductById, id, resetFetchedById]);
 
   if (!fetchedById) {
     return (
@@ -59,11 +57,15 @@ const DisplayProduct = () => {
 
           {/* Product Information */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-4">
-            <h1 className="text-4xl font-bold text-primary">
-              {fetchedById.name}
+            <h1 className="text-3xl font-bold text-primary">
+              Product Name: {fetchedById.name}
             </h1>
-            <p className="text-2xl font-semibold text-secondary">
-              ${fetchedById.price}
+            <p className="text-lg font-semibold text-secondary">
+              Price: ${fetchedById.price}
+            </p>
+            <p className="text-gray-500 text-sm text-justify font-md
+            ">
+              Description: {fetchedById.description}
             </p>
           </div>
         </div>
