@@ -67,7 +67,7 @@ const Products = () => {
             >
               <figure
                 onClick={() => handleDisplayProduct(product._id)}
-                className="px-4 pt-4"
+                className="px-4 cursor-pointer pt-4"
               >
                 <img
                   src={product.imageUrl}
