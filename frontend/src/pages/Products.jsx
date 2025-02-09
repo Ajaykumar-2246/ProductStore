@@ -63,7 +63,6 @@ const Products = () => {
           products.map((product) => (
             <div
               key={product._id}
-              onClick={() => handleDisplayProduct(product._id)}
               className="card bg-base-100 shadow-2xl hover:shadow-2xl transition-shadow duration-300"
             >
               <figure
