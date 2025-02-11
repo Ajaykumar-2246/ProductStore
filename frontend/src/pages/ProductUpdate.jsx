@@ -67,12 +67,16 @@ const ProductUpdate = () => {
 
           {/* Update Form */}
           <div className="w-full lg:w-3/5 bg-base-100 shadow-xl rounded-lg p-4">
-            <h2 className="text-3xl font-bold mb-8 text-primary">Update Product</h2>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
+              Update Product
+            </h2>
             <form className="space-y-3" onSubmit={handleUpdate}>
               {/* Name Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold text-lg">Product Name</span>
+                  <span className="label-text font-semibold text-lg">
+                    Product Name
+                  </span>
                 </label>
                 <input
                   type="text"
@@ -87,7 +91,9 @@ const ProductUpdate = () => {
               {/* Price Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold text-lg">Price ($)</span>
+                  <span className="label-text font-semibold text-lg">
+                    Price ($)
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -102,7 +108,9 @@ const ProductUpdate = () => {
               {/* Image URL Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold text-lg">Image URL</span>
+                  <span className="label-text font-semibold text-lg">
+                    Image URL
+                  </span>
                 </label>
                 <input
                   type="text"
@@ -117,7 +125,9 @@ const ProductUpdate = () => {
               {/* Description Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold text-lg">Description</span>
+                  <span className="label-text font-semibold text-lg">
+                    Description
+                  </span>
                 </label>
                 <textarea
                   value={description}

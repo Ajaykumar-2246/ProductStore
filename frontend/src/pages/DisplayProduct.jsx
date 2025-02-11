@@ -58,14 +58,14 @@ const DisplayProduct = () => {
           {/* Product Information */}
           <div className="w-full md:w-1/2 flex flex-col justify-center gap-4">
             <h1 className="text-3xl font-bold text-primary">
-              Product Name: {fetchedById.name}
+              {fetchedById.name}
             </h1>
             <p className="text-lg font-semibold text-secondary">
-              Price: ${fetchedById.price}
+               ${fetchedById.price}
             </p>
             <p className="text-gray-500 text-sm text-justify font-md
             ">
-              Description: {fetchedById.description}
+              Description: {fetchedById.description || NaN}
             </p>
           </div>
         </div>
